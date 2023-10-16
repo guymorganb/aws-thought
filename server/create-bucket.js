@@ -1,3 +1,7 @@
+/**
+ * we create a S3 bucket to store static files after we set up the database
+ */
+
 // Load the AWS SDK for Node.js This package is responsible for the API that allows the application to communicate with the web service.
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid')
@@ -22,3 +26,16 @@ s3.createBucket(bucketParams, (err, data) =>{
         console.log('Success')
     }
 })
+
+// ccli commands: 
+// npm install aws-sdk uuid
+// node create-bucket.js
+// consider migrating to sdk(v3) for javascript. https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/migrating-to-v3.html
+
+/** We'll be creating a local DynamoDB instance for the development stage
+ * 
+ * Several databases are often used in conjunction with a company's back-end application. 
+ * This way, the specialized abilities of a relational database can be used in 
+ * combination with the scalability and performance of a DynamoDB database. 
+ * This hybrid approach is a way to load balance for performance.
+ */
