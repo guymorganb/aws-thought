@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "guymorgab",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1474.0",
+    "uuid": "^9.0.1"
+  }
+}
