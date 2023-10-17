@@ -12,3 +12,13 @@ node ./server/db/CreateThoughtsTable.js && node ./server/db/LoadThoughts.js
 We can also perform a table scan in the AWS CLI to check whether the data is from the old table or the new table, using the following command:
 
 aws dynamodb scan --table-name Thoughts
+
+
+DynamoDB limits each item or record at 400 kB
+
+
+https://coding-boot-camp.github.io/continuation-courses/static/ebb66240efae1a31512ba35ddff503b2/dc3b8/1000-insomnia-upload.png
+
+The data response from S3 includes the bucket name and the URL of the image, which is assigned to the Location key. This is the value we'll store in the DynamoDB as a reference to this image.
+
+Not only can S3 store images in the cloud, but it also offers a URL that enables access to the image. This is an incredibly useful feature, making the image widely available and accessible once it is stored in the cloud. We'll soon see how we can incorporate this URL into the application to render the images.
