@@ -1,0 +1,14 @@
+Deploy Amazon DynamoDB to AWS
+In this step, we'll deploy DynamoDB to AWS.
+
+We used a local DynamoDB instance for the development phase of creating the database operations. Now that we've fully integrated DynamoDB into the application, let's use the web service and create a new Thoughts table in the cloud.
+
+Now the dynamodb service object will point to the web service and not the local instance, because we previously configured the AWS CLI to connect to the S3 web service. Because we already assigned the access key and secret key, the service object can verify account authentication.
+
+From the root directory, execute the following commands:
+
+node ./server/db/CreateThoughtsTable.js && node ./server/db/LoadThoughts.js
+
+We can also perform a table scan in the AWS CLI to check whether the data is from the old table or the new table, using the following command:
+
+aws dynamodb scan --table-name Thoughts
