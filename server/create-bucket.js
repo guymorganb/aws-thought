@@ -5,12 +5,14 @@
 // Load the AWS SDK for Node.js This package is responsible for the API that allows the application to communicate with the web service.
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid')
+
 // Set the region The region must be updated to communicate with the web service.
 AWS.config.update({ region: 'us-east-2' });
+
 // Create S3 service object The preceding expression creates the s3 instance object with the designated API. 
 // By specifying the API version, we ensure that the API library we're using is compatible with the following commands.
-
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+
 // Next, create the bucketParams object that assigns the metadata of the bucket (such as the bucket name) by adding the following code:
 var bucketParams = {  // 
     Bucket: 'user-images-' + uuidv4(),
