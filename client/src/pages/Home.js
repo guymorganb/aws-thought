@@ -31,10 +31,10 @@ const Home = () => {
         </div>
         <div className={`col-12 mb-3 `}>
           {!isLoaded ? (
-            <div>Loading...</div>
+            <div>Loading...</div> //Once the database response is received, it's assigned to the thoughts state and then passed down to the ThoughtList component as a prop.
           ) : (
               <ThoughtList thoughts={thoughts} setThoughts={setThoughts} title="Some Feed for Thought(s)..." />
-            )}
+            )} 
         </div>
       </div>
     </main>

@@ -15,12 +15,27 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 // Next, create the bucketParams object that assigns the metadata of the bucket (such as the bucket name) by adding the following code:
 var bucketParams = {  // 
+    Bucket: 'user-images-c783cb4d-61b4-431c-b4c0-c7cadbb2658a', //'user-images-' + uuidv4(),
+    PublicAccessBlockConfiguration: {
+        // Set BlockPublicAcls and IgnorePublicAcls to false to allow public access via ACLs
+        BlockPublicAcls: false,
+        IgnorePublicAcls: false,
+        
+        // Depending on your needs, adjust the below values accordingly
+        BlockPublicPolicy: false,
+        RestrictPublicBuckets: false
+      }
+};
+var Params = {  // for creating a new bucket
     Bucket: 'user-images-' + uuidv4(),
-}
+    
+};
+
 
 // call S3 to create the bucket, Now we'll call the s3 instance object to create an S3 bucket using the bucketParams—by adding the following code:
 // Use a callback function with the createBucket method and the bucketParams object to create an S3 bucket.
-s3.createBucket(bucketParams, (err, data) =>{
+// creates the bucket
+s3.createBucket(Params, (err, data) =>{
     if(err){
         console.log('Error', err)
     }
@@ -28,6 +43,14 @@ s3.createBucket(bucketParams, (err, data) =>{
         console.log('Success')
     }
 })
+// set the bucket permissions
+s3.putPublicAccessBlock(bucketParams, (err, data) => {
+    if (err) {
+      console.log(err, err.stack);  // Error information
+    } else {
+      console.log(data);            // Successful response
+    }
+  });
 
 // ccli commands: 
 // npm install aws-sdk uuid

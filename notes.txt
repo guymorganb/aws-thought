@@ -9,7 +9,7 @@ From the root directory, execute the following commands:
 
 node ./server/db/CreateThoughtsTable.js && node ./server/db/LoadThoughts.js
 
-We can also perform a table scan in the AWS CLI to check whether the data is from the old table or the new table, using the following command:
+We can also perform a table scan in the AWS CLI to check whether the data is from the old table or the new table, this is useful for a quick inspection, using the following command:
 
 aws dynamodb scan --table-name Thoughts
 

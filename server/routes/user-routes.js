@@ -50,6 +50,7 @@ router.get('/users/:username', (req, res) => {
             '#un': 'username',
             '#ca': 'createdAt',
             '#th': 'thought',
+            '#img': 'image'
         },
         ExpressionAttributeValues: {
             ':user': req.params.username,
@@ -59,7 +60,7 @@ router.get('/users/:username', (req, res) => {
             // which was received from the client. To reiterate, we're using the username selected by the 
             // user in the client to determine the condition of the search. This way, the user will decide which username to query.
         },
-        ProjectionExpression: '#th, #ca', // the ProjectExpression property determines which attributes or columns will be returned.
+        ProjectionExpression: '#un, #th, #ca, #img', // the ProjectExpression property determines which attributes or columns will be returned.
         ScanIndexForward: false,
         // The default setting is true, which specifies the order for the sort key, which will be ascending. 
         // The sort key was assigned to the createdAt attribute when we first created the table. 
@@ -81,7 +82,7 @@ router.get('/users/:username', (req, res) => {
  * Create new user at /api/users
  * Endpoint [POST]
  * Development: localhost:3001/api/users
-*/ 
+*/
 router.post('/users', (req, res) => {
     const params = {
       TableName: table,
@@ -89,6 +90,7 @@ router.post('/users', (req, res) => {
         username: req.body.username,
         createdAt: Date.now(),  // we used the createdAt property as the sort key, which will help us sort the thoughts chronologically when we want to render them in the profile page.
         thought: req.body.thought,
+        image: req.body.image // we'll modify the /api/users POST route so that the image attribute 'Location' will be added to the src attribute in the <img> element when created in DynamoDB
       },
     };
     // database call

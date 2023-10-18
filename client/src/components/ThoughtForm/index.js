@@ -20,7 +20,7 @@ const ThoughtForm = () => {
   const handleImageUpload = (event) => {
     event.preventDefault();
     console.log("upload button clicked")
-    const data = new FormData();
+    const data = new FormData();  // form data is an interface
     data.append('image', fileInput.current.files[0]);
     // send image file to endpoint with the postImage function
     // Because the image upload process to S3 is an asynchronous request that will take some time, 
