@@ -22,3 +22,21 @@ https://coding-boot-camp.github.io/continuation-courses/static/ebb66240efae1a315
 The data response from S3 includes the bucket name and the URL of the image, which is assigned to the Location key. This is the value we'll store in the DynamoDB as a reference to this image.
 
 Not only can S3 store images in the cloud, but it also offers a URL that enables access to the image. This is an incredibly useful feature, making the image widely available and accessible once it is stored in the cloud. We'll soon see how we can incorporate this URL into the application to render the images.
+
+
+Nginx configuration w/ comments:
+# This block defines the configuration for a server that listens to HTTP requests.
+server {
+    listen 80 default_server;       # This server listens on port 80, which is the standard port for HTTP. 'default_server' means that this server block will be the default one to respond if no other block matches.
+    listen [::]:80 default_server;  # This is the IPv6 equivalent of the above. If the server receives an IPv6 request on port 80, it will respond.
+    server_name _;                  # The server_name directive sets the request domain. The underscore (_) is a catch-all that matches any domain.
+   
+    location / {                    # This location block matches requests to the root URL (e.g., http://yourdomain.com/)
+        root /opt/aws-thought/client/build;     # Specifies the directory where Nginx should look for files to serve for this location block.
+        index index.html;                       # This tells Nginx the default file it should look for when a directory is requested.
+        try_files $uri /index.html;             # This directive checks if the requested file exists, and if not, serves the /index.html file.
+    }
+    location /api/ {                # This location block matches requests that start with /api/ (e.g., http://yourdomain.com/api/some-endpoint)
+        proxy_pass http://localhost:3001;       # Instead of serving files from disk, this forwards the request to a different server. In this case, it forwards requests to a server running on the same machine on port 3001.
+    }
+}
